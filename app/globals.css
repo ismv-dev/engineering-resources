@@ -442,6 +442,7 @@ body.dark-mode .sidebar-button.active {
   }
 
   .sudoku-input {
+    color: var(--dark-text-muted) !important;
     width: 2.5rem;
     height: 2.5rem;
     box-sizing: border-box;
@@ -480,8 +481,14 @@ body.dark-mode .sidebar-button.active {
 
   .game-header {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     align-items: center;
+    gap: 1.125rem;
+    width: 100%;
+  }
+
+  .indicators-row {
+    display: flex;
     justify-content: center;
     gap: 1.125rem;
     width: 100%;
@@ -492,7 +499,7 @@ body.dark-mode .sidebar-button.active {
     flex-direction: column;
     align-items: center;
     gap: 0.375rem;
-    min-width: 7rem;
+    width: 100%;
   }
 
   .indicator-label {
@@ -500,6 +507,8 @@ body.dark-mode .sidebar-button.active {
     text-transform: uppercase;
     letter-spacing: 0.12em;
     color: rgba(0, 0, 0, 0.55);
+    width: 100%;
+    text-align: center;
   }
 
   .timer,
@@ -507,7 +516,7 @@ body.dark-mode .sidebar-button.active {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 7rem;
+    width: 100%;
     padding: 0.75rem 1rem;
     border-radius: 1.875rem;
     background-color: var(--games-minesweeper-panel);
@@ -533,6 +542,10 @@ body.dark-mode .sidebar-button.active {
   }
 
   .diff-btn:hover {
+    background-color: var(--btn-hover);
+  }
+
+  .diff-btn.active {
     background-color: var(--btn-hover);
   }
 
@@ -649,7 +662,7 @@ body.dark-mode .sidebar-button.active {
 
 .news-item-content.resume {
     -webkit-box-orient: vertical;
-    max-height: 300px;
+    max-height: 240px;
     line-height: 1.5;
     overflow: hidden;
 }
@@ -724,7 +737,8 @@ body.dark-mode .sidebar-button.active {
 }
 
 .btnPregunta,
-.game-card {
+.game-card,
+.btn-game-return {
   border-radius: 12px;
   padding: 10px 14px;
   border: 1px solid rgba(0, 0, 0, 0.08);
@@ -733,7 +747,8 @@ body.dark-mode .sidebar-button.active {
 }
 
 .btnPregunta:hover,
-.game-card:hover {
+.game-card:hover,
+.btn-game-return:hover {
   background: var(--dark-btn-hover);
 }
 
@@ -841,8 +856,14 @@ body.dark-mode .sidebar-button.active {
 
 .game-header {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   align-items: center;
+  gap: 18px;
+  width: 100%;
+}
+
+.indicators-row {
+  display: flex;
   justify-content: center;
   gap: 18px;
   width: 100%;
@@ -853,14 +874,16 @@ body.dark-mode .sidebar-button.active {
   flex-direction: column;
   align-items: center;
   gap: 6px;
-  min-width: 104px;
+  width: 100%;
 }
 
 .indicator-label {
   font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: rgba(0, 0, 0, 0.55);
+  color: var(--dark-text-secondary);
+  width: 100%;
+  text-align: center;
 }
 
 .timer,
@@ -868,7 +891,7 @@ body.dark-mode .sidebar-button.active {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 100px;
+  width: 100%;
   padding: 12px 16px;
   border-radius: 16px;
   background: var(--games-minesweeper-panel);
@@ -888,13 +911,13 @@ body.dark-mode .sidebar-button.active {
 .diff-btn {
   padding: 10px 14px;
   border-radius: 12px;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  background: var(--btn-bg);
+  border: 1px solid var(--dark-border);
+  background: var(--dark-btn-bg);
   cursor: pointer;
 }
 
 .diff-btn.active {
-  background: var(--btn-hover);
+  background: var(--dark-btn-hover);
 }
 
 .cell {

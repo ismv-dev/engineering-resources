@@ -6,6 +6,13 @@ export default function Sidebar({ view, theme, onViewChange, onThemeChange }) {
       <nav className="sidebar-nav">
         <button
           type="button"
+          className={`sidebar-button ${view === "electricidad" ? "active" : ""}`}
+          onClick={() => onViewChange("electricidad")}
+        >
+          Electricidad
+        </button>
+        <button
+          type="button"
           className={`sidebar-button ${view === "noticias" ? "active" : ""}`}
           onClick={() => onViewChange("noticias")}
         >
