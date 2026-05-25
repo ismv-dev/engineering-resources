@@ -9,6 +9,7 @@ import QuestionSummary from "./components/QuestionSummary";
 import { buildArithmeticExpression, getBinaryConversion } from "./lib/operations";
 import NewsSection from "./components/NewsSection";
 import { useRef } from "react";
+import ElectricidadSection from "./components/ElectricidadSection";
 
 const NIVELES_PREGUNTA = ["Bajo", "Normal", "Avanzado", "Experto"];
 
@@ -329,6 +330,9 @@ export default function Home() {
         onThemeChange={setTheme}
       />
       <main className="main-content">
+        { view === "electricidad" && (
+          <ElectricidadSection />
+        )}
         { view === "noticias" && (
           <NewsSection 
             articles={newsArticles}

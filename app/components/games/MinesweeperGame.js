@@ -284,10 +284,6 @@ export default function MinesweeperGame() {
   return (
     <div className="minesweeper-game">
       <div className="game-header">
-        <div className="indicator">
-          <span className="indicator-label">Time</span>
-          <span className="timer">{fmt(timer)}</span>
-        </div>
         <div className="difficulty-buttons">
           {Object.keys(DIFFICULTIES).map((diff) => (
             <button
@@ -299,11 +295,17 @@ export default function MinesweeperGame() {
             </button>
           ))}
         </div>
-        <div className="indicator">
-          <span className="indicator-label">Mines</span>
-          <span className="mine-count">
-            {fmt(config.mines - flagged.flat().filter(f => f).length)}
-          </span>
+        <div className="indicators-row">
+          <div className="indicator">
+            <span className="indicator-label">Time</span>
+            <span className="timer">{fmt(timer)}</span>
+          </div>
+          <div className="indicator">
+            <span className="indicator-label">Mines</span>
+            <span className="mine-count">
+              {fmt(config.mines - flagged.flat().filter(f => f).length)}
+            </span>
+          </div>
         </div>
       </div>
 
