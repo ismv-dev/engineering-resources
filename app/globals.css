@@ -1193,6 +1193,9 @@ body.dark-mode .sidebar-button.active {
   border: 1px solid #ccc;
   border-radius: 3px;
 }
+body.dark-mode .filter-input {
+  background-color: var(--dark-bg);
+}
 
 .category-search-input {
   width: 100%;

@@ -52,22 +52,17 @@ export async function POST(request) {
 
   const tipo = capitalize(type);
   const nivel = capitalize(level);
-  let prompt = `Crea pregunta: ${theme}, tipo ${tipo}, nivel "${nivel}", [20-500] caracteres`;
+  let prompt = `Crea una pregunta sobre: ${theme} - tipo ${tipo} - nivel "${nivel}", [20-500] caracteres siguiendo el siguiente formato exactamente igual, no agregues símbolos markdown ni ningún caracter extra:`;
 
   if (tipo.toLowerCase().includes("verdadero") && tipo.toLowerCase().includes("falso")) {
-    prompt += `"--" Verdadero o Falso según corresponda.`;
+    prompt += `<pregunta> -- <Verdadero o Falso según corresponda>`;
   } else if (tipo.toLowerCase().includes("alternativ")) {
-    prompt += `"--". Crea 2-5 opciones separadas por "--". Marca la correcta con "*" al final`;
+    prompt += `<pregunta> -- <de 2 a 5 opciones separadas por "--". Marca la correcta con "*" al final>`;
   }
 
   try {
     const text = await askAI(
-      `Crea una pregunta basada en el siguiente tema:
-      ### TEMA: ${theme}
-      ### TIPO: ${tipo}
-      ### NIVEL: ${nivel}
-      
-      Instrucción: Genera la pregunta siguiendo el formato solicitado.`,
+      prompt,
       'Responde solo lo solicitado. Prohibido: intros, saludos, cierres, explicaciones, caracteres no solicitados o muletillas (ej. "Aquí tienes"). Si la respuesta es un dato, entrega solo el dato. Sin ningún formato Markdown. Sé puramente funcional'
     );
     const qaParts = text.split("--").map((item) => item.trim());
