@@ -33,6 +33,7 @@ async function askAI(prompt, instructions) {
 
 export async function POST(request) {
   // Validar token de autorización en producción
+  /*
   if (process.env.NODE_ENV === "production") {
     const authHeader = request.headers.get("authorization");
     const expectedToken = process.env.API_SECRET;
@@ -40,6 +41,7 @@ export async function POST(request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
   }
+  */
 
   const body = await request.json();
   const theme = typeof body.theme === 'string' ? body.theme.trim().substring(0, 200) : null;
