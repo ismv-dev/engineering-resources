@@ -6,13 +6,6 @@ export default function Sidebar({ view, theme, onViewChange, onThemeChange }) {
       <nav className="sidebar-nav">
         <button
           type="button"
-          className={`sidebar-button ${view === "electricidad" ? "active" : ""}`}
-          onClick={() => onViewChange("electricidad")}
-        >
-          Electricidad
-        </button>
-        <button
-          type="button"
           className={`sidebar-button ${view === "noticias" ? "active" : ""}`}
           onClick={() => onViewChange("noticias")}
         >
@@ -20,10 +13,10 @@ export default function Sidebar({ view, theme, onViewChange, onThemeChange }) {
         </button>
         <button
           type="button"
-          className={`sidebar-button ${view === "juegos" ? "active" : ""}`}
-          onClick={() => onViewChange("juegos")}
+          className={`sidebar-button ${view === "Formulas" ? "active" : ""}`}
+          onClick={() => onViewChange("Formulas")}
         >
-          Juegos
+          Formulas
         </button>
         <button
           type="button"
@@ -34,10 +27,17 @@ export default function Sidebar({ view, theme, onViewChange, onThemeChange }) {
         </button>
         <button
           type="button"
-          className={`sidebar-button ${view === "operaciones" ? "active" : ""}`}
-          onClick={() => onViewChange("operaciones")}
+          className={`sidebar-button ${view === "ejercicios" ? "active" : ""}`}
+          onClick={() => onViewChange("ejercicios")}
         >
-          Matemáticas
+          Ejercicios
+        </button>
+        <button
+          type="button"
+          className={`sidebar-button ${view === "juegos" ? "active" : ""}`}
+          onClick={() => onViewChange("juegos")}
+        >
+          Juegos
         </button>
       </nav>
       <div className="theme-switch-wrapper">

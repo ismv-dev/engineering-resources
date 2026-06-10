@@ -35,7 +35,7 @@ export default function TriviaSection({
         <br/>
         <div className="question-row">
           <button className="btn" type="button" onClick={onGenerateQuestion} disabled={isLoading}>
-            {isLoading ? "Generando..." : "Generar pregunta"}
+            {isLoading ? "Generando..." : "Generar preguntas"}
           </button>
         </div>
         <br/>

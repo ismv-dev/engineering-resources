@@ -3,13 +3,13 @@
 import { useEffect, useState } from "react";
 import Sidebar from "./components/Sidebar";
 import TriviaSection from "./components/TriviaSection";
-import OperationSection from "./components/OperationSection";
+import ExercisesSection from "./components/ExercisesSection";
 import GamesSection from "./components/GamesSection";
 import QuestionSummary from "./components/QuestionSummary";
-import { buildArithmeticExpression, getBinaryConversion } from "./lib/operations";
+import { buildArithmeticExpression, getBinaryConversion } from "./lib/exercises";
 import NewsSection from "./components/NewsSection";
 import { useRef } from "react";
-import ElectricidadSection from "./components/ElectricidadSection";
+import FormulasSection from "./components/FormulasSection";
 
 const NIVELES_PREGUNTA = ["Bajo", "Normal", "Avanzado", "Experto"];
 
@@ -28,10 +28,10 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [feedback, setFeedback] = useState("");
   const [summaryOpen, setSummaryOpen] = useState(false);
-  const [operationMode, setOperationMode] = useState(0);
-  const [operationDisplay, setOperationDisplay] = useState("2+2");
-  const [operationAnswer, setOperationAnswer] = useState("");
-  const [operationFeedback, setOperationFeedback] = useState("");
+  const [exerciseMode, setExerciseMode] = useState(0);
+  const [exerciseDisplay, setExerciseDisplay] = useState("2+2");
+  const [exerciseAnswer, setExerciseAnswer] = useState("");
+  const [exerciseFeedback, setExerciseFeedback] = useState("");
   const [selectedGame, setSelectedGame] = useState(null);
 
   // --- News State ---
@@ -150,18 +150,18 @@ export default function Home() {
   }, [theme]);
 
   useEffect(() => {
-    if (view === "operaciones") {
-      updateOperationDisplay(operationMode);
-      setOperationFeedback("");
+    if (view === "ejercicios") {
+      updateExerciseDisplay(exerciseMode);
+      setExerciseFeedback("");
     }
     if (view !== "juegos") {
       setSelectedGame(null);
     }
-  }, [view, operationMode]);
+  }, [view, exerciseMode]);
 
   useEffect(() => {
-    updateOperationDisplay(operationMode);
-  }, [operationMode]);
+    updateExerciseDisplay(exerciseMode);
+  }, [exerciseMode]);
 
   const activeQuestion = questions[activeIndex] || null;
 
@@ -280,44 +280,44 @@ export default function Home() {
     setSummaryOpen(true);
   };
 
-  const updateOperationDisplay = (mode) => {
+  const updateExerciseDisplay = (mode) => {
     if (mode === 0) {
-      setOperationDisplay(buildArithmeticExpression());
+      setExerciseDisplay(buildArithmeticExpression());
     } else {
-      setOperationDisplay(getBinaryConversion());
+      setExerciseDisplay(getBinaryConversion());
     }
   };
 
-  const handleVerifyOperation = () => {
+  const handleVerifyExercise = () => {
     try {
-      if (operationMode === 0) {
-        const expected = parseFloat(eval(operationDisplay));
-        const userValue = parseFloat(operationAnswer || "");
+      if (exerciseMode === 0) {
+        const expected = parseFloat(eval(exerciseDisplay));
+        const userValue = parseFloat(exerciseAnswer || "");
         if (Number.isNaN(userValue)) {
-          setOperationFeedback("Ingresa un número válido.");
+          setExerciseFeedback("Ingresa un número válido.");
           return;
         }
         if (Math.abs(userValue - expected) < 1e-9) {
-          setOperationFeedback("Correcto!");
+          setExerciseFeedback("Correcto!");
         } else {
-          setOperationFeedback("Incorrecto");
+          setExerciseFeedback("Incorrecto");
         }
       } else {
-        const userValue = parseInt(operationAnswer || "", 10);
+        const userValue = parseInt(exerciseAnswer || "", 10);
         if (Number.isNaN(userValue)) {
-          setOperationFeedback("Ingresa un número válido.");
+          setExerciseFeedback("Ingresa un número válido.");
           return;
         }
-        if (userValue.toString(2).padStart(8, "0") === operationDisplay) {
-          setOperationFeedback("Correcto!");
+        if (userValue.toString(2).padStart(8, "0") === exerciseDisplay) {
+          setExerciseFeedback("Correcto!");
         } else {
-          setOperationFeedback("Incorrecto");
+          setExerciseFeedback("Incorrecto");
         }
       }
-      setOperationAnswer("");
-      updateOperationDisplay(operationMode);
+      setExerciseAnswer("");
+      updateExerciseDisplay(exerciseMode);
     } catch (error) {
-      setOperationFeedback("Error evaluando la operación.");
+      setExerciseFeedback("Error evaluando la operación.");
     }
   };
 
@@ -330,9 +330,6 @@ export default function Home() {
         onThemeChange={setTheme}
       />
       <main className="main-content">
-        { view === "electricidad" && (
-          <ElectricidadSection />
-        )}
         { view === "noticias" && (
           <NewsSection 
             articles={newsArticles}
@@ -346,11 +343,8 @@ export default function Home() {
             filters={newsFilters}
           />
         )}
-        {view === "juegos" && (
-          <GamesSection
-            selectedGame={selectedGame}
-            onSelectGame={setSelectedGame}
-          />
+        { view === "Formulas" && (
+          <FormulasSection />
         )}
         {view === "trivias" && (
           <TriviaSection
@@ -370,16 +364,22 @@ export default function Home() {
             onFinish={handleFinish}
           />
         )}
-        {view === "operaciones" && (
-          <OperationSection
-            operationDisplay={operationDisplay}
-            operationAnswer={operationAnswer}
-            operationMode={operationMode}
-            operationFeedback={operationFeedback}
-            onAnswerChange={setOperationAnswer}
-            onModeChange={setOperationMode}
-            onRefresh={() => updateOperationDisplay(operationMode)}
-            onVerify={handleVerifyOperation}
+        {view === "ejercicios" && (
+          <ExercisesSection
+            exerciseDisplay={exerciseDisplay}
+            exerciseAnswer={exerciseAnswer}
+            exerciseMode={exerciseMode}
+            exerciseFeedback={exerciseFeedback}
+            onAnswerChange={setExerciseAnswer}
+            onModeChange={setExerciseMode}
+            onRefresh={() => updateExerciseDisplay(exerciseMode)}
+            onVerify={handleVerifyExercise}
+          />
+        )}
+        {view === "juegos" && (
+          <GamesSection
+            selectedGame={selectedGame}
+            onSelectGame={setSelectedGame}
           />
         )}
         {summaryOpen && (
